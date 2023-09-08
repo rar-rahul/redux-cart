@@ -1,7 +1,12 @@
 import react from "react";
+import { addToCart } from "../Redux/cartslice";
+import {useSelector,useDispatch} from "react-redux"
 import "../styles.css";
 const List = ({ props }) => {
   const { products } = props;
+  const dispatch = useDispatch()
+  const store = useSelector(state => state.cart)
+console.log(store)
 
   return (
     <>
@@ -19,7 +24,17 @@ const List = ({ props }) => {
             </div>
             <button
               style={{ color: "green", padding: "2px", background: "#ccc" }}
-            >
+            onClick={() => {
+              dispatch(addToCart(
+                {
+                  id:p.id,
+                  pname:p.title,
+                  price:p.price,
+                  qty:1
+  
+                }
+              ))
+            }}>
               AddToCart
             </button>
           </div>
